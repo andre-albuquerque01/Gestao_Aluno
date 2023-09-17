@@ -1,13 +1,9 @@
 import { useEffect } from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Register() {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, errors, reset } = useForm({
         name: '',
         email: '',
         password: '',
@@ -23,18 +19,18 @@ export default function Register() {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('register'));
+        post(route('registro'));
     };
 
     return (
         <GuestLayout>
-            <Head title="Register" />
+            <Head title="Registro" />
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <label htmlFor="name">Nome</label>
 
-                    <TextInput
+                    <input
                         id="name"
                         name="name"
                         value={data.name}
@@ -45,13 +41,13 @@ export default function Register() {
                         required
                     />
 
-                    <InputError message={errors.name} className="mt-2" />
+                   <span className="text-red-500 mt-2">{errors.name}</span>
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
+                    <label htmlFor="email">Email</label>
 
-                    <TextInput
+                    <input
                         id="email"
                         type="email"
                         name="email"
@@ -62,13 +58,13 @@ export default function Register() {
                         required
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
+                   <span className="text-red-500 mt-2">{errors.email}</span>
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <label htmlFor="password">Senha</label>
 
-                    <TextInput
+                    <input
                         id="password"
                         type="password"
                         name="password"
@@ -79,13 +75,13 @@ export default function Register() {
                         required
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
+                   <span className="text-red-500 mt-2">{errors.password}</span>
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
+                    <label htmlFor="password_confirmation">Confirma senha</label>
 
-                    <TextInput
+                    <input
                         id="password_confirmation"
                         type="password"
                         name="password_confirmation"
@@ -96,22 +92,19 @@ export default function Register() {
                         required
                     />
 
-                    <InputError message={errors.password_confirmation} className="mt-2" />
+                   <span className="text-red-500 mt-2">{errors.password_confirmation}</span>
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    <Link
-                        href={route('login')}
-                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                        Already registered?
-                    </Link>
-
-                    <PrimaryButton className="ml-4" disabled={processing}>
-                        Register
-                    </PrimaryButton>
+                    <button className="ml-4 px-4 py-2 bg-blue-600 rounded-md text-white hover:bg-blue-400">
+                        Registrar
+                    </button>
                 </div>
             </form>
+            <hr class="border-gray-600 mt-7 mr-20 ml-20" />
+            <div class="mt-5 text-center">
+                <a href="/" class="text-gray-400 hover:underline">Já tem cadastro?</a>
+            </div>
         </GuestLayout>
     );
 }

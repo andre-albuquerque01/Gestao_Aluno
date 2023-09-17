@@ -8,10 +8,9 @@ import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Login({ status, canResetPassword }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, errors, reset } = useForm({
         email: '',
         password: '',
-        remember: false,
     });
 
     useEffect(() => {
@@ -23,20 +22,17 @@ export default function Login({ status, canResetPassword }) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('login'));
+        post(route('entrar'));
     };
 
     return (
         <GuestLayout>
-            <Head title="Log in" />
-
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-
+            <Head title="Entrar" />
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <label htmlFor="email" value="Email">Email</label>
 
-                    <TextInput
+                    <input
                         id="email"
                         type="email"
                         name="email"
@@ -45,15 +41,16 @@ export default function Login({ status, canResetPassword }) {
                         autoComplete="username"
                         isFocused={true}
                         onChange={(e) => setData('email', e.target.value)}
+                        required
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
+                    <span className="text-red-500 mt-2">{errors.email}</span>
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <label htmlFor="password" value="Password">Senha</label>
 
-                    <TextInput
+                    <input
                         id="password"
                         type="password"
                         name="password"
@@ -61,37 +58,22 @@ export default function Login({ status, canResetPassword }) {
                         className="mt-1 block w-full"
                         autoComplete="current-password"
                         onChange={(e) => setData('password', e.target.value)}
+                        required
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="block mt-4">
-                    <label className="flex items-center">
-                        <Checkbox
-                            name="remember"
-                            checked={data.remember}
-                            onChange={(e) => setData('remember', e.target.checked)}
-                        />
-                        <span className="ml-2 text-sm text-gray-600">Remember me</span>
-                    </label>
+                    <span className="text-red-500 mt-2">{errors.password}</span>
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
-
-                    <PrimaryButton className="ml-4" disabled={processing}>
+                    <button className="ml-4 px-4 py-2 bg-blue-600 rounded-md text-white hover:bg-blue-400">
                         Log in
-                    </PrimaryButton>
+                    </button>
                 </div>
             </form>
+            <hr class="border-gray-600 mt-7 mr-20 ml-20"/>
+                <div class="mt-5 text-center">
+                    <a href="register" class="text-gray-400 hover:underline">Não tem cadastro?</a>
+                </div>
         </GuestLayout>
     );
 }

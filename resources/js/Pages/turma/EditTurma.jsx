@@ -18,7 +18,7 @@ export default function CadastroTurma() {
 
     return (
         <>
-            <Head title="Cadastro Turma" />
+            <Head title="Editar Turma" />
             <div className="flex justify-center">
                 <form onSubmit={submit}>
                     <div className="mt-5 text-2xl">
