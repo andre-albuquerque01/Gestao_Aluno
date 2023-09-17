@@ -1,25 +1,30 @@
-import { useForm } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
 
-export default function CadastroAluno() {
+export default function EditAluno() {
     const { data, setData, post, errors } = useForm({
-        nome: '',
-        cpf: '',
-        sexo: '',
-        dataNasc: '',
-        email: '',
-        rendaMensal: '',
+        id: usePage().props.aluno.id,
+        nome: usePage().props.aluno.nome,
+        cpf: usePage().props.aluno.cpf,
+        sexo: usePage().props.aluno.sexo,
+        dataNasc: usePage().props.aluno.dataNasc,
+        email: usePage().props.aluno.email,
+        rendaMensal: usePage().props.aluno.rendaMensal,
     });
+
     const submit = (e) => {
         e.preventDefault();
-        post(route('alunoCadastro'));
+        post(route('upAluno'));
         console.log('Foi enviado')
     };
+    console.log()
     return (
+
         <div className="flex justify-center">
             <form onSubmit={submit} >
-            <div className="mt-5 text-2xl">
-                        <h1>Cadastro do aluno</h1>
-                    </div>
+                <div className="mt-5 text-2xl">
+                    <h1>Cadastro do aluno</h1>
+                </div>
+                
                 <div className="flex flex-col space-y-1 mt-4">
                     <label htmlFor="nome" className="">Nome:</label>
                     <input
@@ -45,7 +50,7 @@ export default function CadastroAluno() {
                         placeholder="000.000.000-00"
                         value={data.cpf}
                         onChange={(e) => setData('cpf', e.target.value)}
-                        required />
+                        required  disabled/>
                     <span className="text-red-500 mt-2">{errors.cpf}</span>
                 </div>
                 <div className="flex flex-col space-y-1 mt-4">
@@ -125,7 +130,7 @@ export default function CadastroAluno() {
                     />
                     <span className="text-red-500 mt-2">{errors.rendaMensal}</span>
                 </div>
-                <button className="px-4 py-2 rounded-lg mt-4 bg-blue-600 text-white hover:bg-blue-400">Cadastrar</button>
+                <button className="px-4 py-2 rounded-lg mt-4 bg-blue-600 text-white hover:bg-blue-400">Editar</button>
             </form >
         </div >
     )

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('alunos', function (Blueprint $table) {
             $table->id();
             $table->string('nome')->nullable(false); // Tornar não nulo
-            $table->string('cpf', 11)->unique()->nullable(false); // Tornar não nulo
+            $table->string('cpf', 14)->unique()->nullable(false); // Tornar não nulo
             $table->char('sexo', 2)->nullable(false); // Tornar não nulo
             $table->date('dataNasc')->nullable(false); 
             $table->string('email', 150)->unique()->nullable(false); // Tornar não nulo

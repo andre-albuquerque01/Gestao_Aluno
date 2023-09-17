@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TurmaController;
+use App\Models\Turma;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,11 +38,19 @@ Route::get('/', function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
+// Cadastro e tela
 Route::inertia('/cadastroAluno', 'aluno/CadastroAluno')->name('aluno.CadastroAluno');
 Route::inertia('/cadastroTurma', 'turma/CadastroTurma')->name('turma.CadastroTurma');
-
 Route::post('/turmaCadastro', [TurmaController::class, 'store'])->name('turmaCadastro');
 Route::post('/alunoCadastro', [AlunoController::class, 'store'])->name('alunoCadastro');
+
+// Editar e tela
+Route::get('/editAluno/{id}', [AlunoController::class, 'show'])->name('editAluno');
+Route::get('/editTurma/{id}', [TurmaController::class, 'show'])->name('editTurma');
+
+Route::post('/updateTurma', [TurmaController::class, 'update'])->name('upTurma');
+Route::post('/updateAluno', [AlunoController::class, 'update'])->name('upAluno');
+
 
 
 require __DIR__ . '/auth.php';
