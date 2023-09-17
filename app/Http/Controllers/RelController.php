@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\rel;
+use App\Models\Aluno;
+use App\Models\Rel;
+use App\Models\Turma;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class RelController extends Controller
 {
@@ -34,10 +37,17 @@ class RelController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(rel $rel)
+    public function show(Rel $rel)
     {
-        //
+        $turmas = Turma::all();
+        $alunos = Aluno::all();
+
+        return Inertia::render('sala/CadastroSala', [
+            'turmas' => $turmas,
+            'alunos' => $alunos,
+        ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

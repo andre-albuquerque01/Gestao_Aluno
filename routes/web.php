@@ -4,6 +4,7 @@ use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RelController;
 use App\Http\Controllers\TurmaController;
 use App\Models\Turma;
 use Illuminate\Foundation\Application;
@@ -52,14 +53,18 @@ Route::middleware('auth')->group(function () {
     Route::inertia('/cadastroTurma', 'turma/CadastroTurma')->name('CadastroTurma');
     Route::post('/turmaCadastro', [TurmaController::class, 'store'])->name('turmaCadastro');
     Route::post('/alunoCadastro', [AlunoController::class, 'store'])->name('alunoCadastro');
-
+    
     // Editar e tela
     Route::get('/editAluno/{id}', [AlunoController::class, 'show'])->name('editAluno');
     Route::get('/editTurma/{id}', [TurmaController::class, 'show'])->name('editTurma');
-
+    
     Route::post('/updateTurma', [TurmaController::class, 'update'])->name('upTurma');
     Route::post('/updateAluno', [AlunoController::class, 'update'])->name('upAluno');
+    
+    // Cadastro sala
 });
+Route::get('/cadastroSala', [RelController::class, 'show'])->name('CadastroSala');
+// Route::inertia('/cadastroSala', 'sala/CadastroSala')->name('CadastroSala');
 
 
 
