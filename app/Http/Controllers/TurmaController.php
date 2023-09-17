@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\turma;
+use App\Models\Turma;
 use Illuminate\Http\Request;
 
 class TurmaController extends Controller
@@ -28,7 +28,34 @@ class TurmaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'codTurma' => 'required|string|max:100',
+            'dataInicio' => 'required|date',
+            'dataFim' => 'required|date',
+            'qtdAlunos' => 'required',
+        ]);
+
+        try {
+            // Inserir na tabela 'turma'
+            Turma::create([
+                'codTurma' => $request->codTurma,
+                'dataInicio' => $request->dataInicio,
+                'dataFim' => $request->dataFim,
+                'qtdAlunos' => $request->qtdAlunos,
+            ]);
+
+            // Retornar um status de sucesso
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Turma criada com sucesso!',
+            ]);
+        } catch (\Exception $e) {
+            // Retornar um status de erro
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 
     /**

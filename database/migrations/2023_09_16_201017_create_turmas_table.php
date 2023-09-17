@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('turmas', function (Blueprint $table) {
             $table->id();
-            $table->string('CodTurma')->nullable();
-            $table->date('dataInicio')->nullable();
-            $table->date('dataFim')->nullable();
-            $table->integer('qtdAlunos')->nullable();
+            $table->string('codTurma')->nullable(false); // Tornar não nulo
+            $table->date('dataInicio')->nullable(false); 
+            $table->date('dataFim')->nullable(false); 
+            $table->integer('qtdAlunos')->nullable(false); 
             $table->timestamps();
         });
     }
