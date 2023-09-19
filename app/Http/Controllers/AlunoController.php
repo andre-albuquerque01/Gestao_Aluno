@@ -31,12 +31,9 @@ class AlunoController extends Controller
      */
     public function store(Request $request)
     {
-        // Remover mascara
         // $cpfSemMascara = preg_replace("/[^0-9]/", "", $request->cpf);
         $cpf = preg_replace('/[^0-9]/', '', $request->cpf);
-        // Adiciona a máscara de CPF (999.999.999-99)
         $cpfComMascara = substr($cpf, 0, 3) . '.' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-' . substr($cpf, 9, 2);
-        // dd($request->all());
         $request->validate([
             'nome' => 'required|string|max:100',
             'cpf' => 'required|max:14|min:14|unique:alunos,cpf',
@@ -47,7 +44,6 @@ class AlunoController extends Controller
         if ($request->rendaMensal == "") $rendaMenal = 0;
         else $rendaMenal = $request->rendaMensal;
         try {
-            // Inserir na tabela 'aluno'
             Aluno::create([
                 'nome' => $request->nome,
                 'cpf' => $cpfComMascara,
@@ -77,9 +73,6 @@ class AlunoController extends Controller
     public function show($id)
     {
         $aluno = Aluno::find($id);
-        if (!$aluno) {
-            // Trate o caso em que o aluno não foi encontrado, como redirecionar para uma página de erro ou retornar uma resposta adequada.
-        }
         Inertia::share('aluno', $aluno);
 
         return Inertia::render('aluno/EditAluno');

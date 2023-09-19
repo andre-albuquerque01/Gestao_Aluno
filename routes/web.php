@@ -64,7 +64,7 @@ Route::middleware('auth')->group(function () {
     // Cadastro sala
 });
 Route::get('/cadastroSala', [RelController::class, 'show'])->name('CadastroSala');
-// Route::inertia('/cadastroSala', 'sala/CadastroSala')->name('CadastroSala');
+Route::post('/cadSala', [RelController::class, 'store'])->name('cadSala');
 
 
 

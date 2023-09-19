@@ -31,13 +31,28 @@ class RelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'alunos_id' => 'required',
+            'turmas_id' => 'required',
+        ]);
+
+        $turma = Turma::find($request->turmas_id);
+
+        if ($turma->qtdAlunos < Rel::where('turmas_id', $request->turmas_id)->count()) {
+            return response()->json(['errors' => 'A turma atingiu o limite máximo de alunos permitidos.'], 422);
+
+        } else {
+            Rel::create([
+                'alunos_id' => $request->alunos_id,
+                'turmas_id' => $request->turmas_id,
+            ]);
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Rel $rel)
+    public function show()
     {
         $turmas = Turma::all();
         $alunos = Aluno::all();

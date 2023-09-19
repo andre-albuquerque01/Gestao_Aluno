@@ -1,16 +1,14 @@
 import { Head, useForm, usePage } from "@inertiajs/react";
 
 export default function CadastroSala() {
-    const { data, setData, post, errors } = useForm({
-        idTurma: usePage().props.turmas.id || '', // Certifique-se de ajustar isso conforme necessário
-        codTurma: usePage().props.turmas.codTurma || '', // Certifique-se de ajustar isso conforme necessário
-        idAluno: usePage().props.alunos.id || '', // Certifique-se de ajustar isso conforme necessário
-        nomeAluno: usePage().props.alunos.nome || '', // Certifique-se de ajustar isso conforme necessário
+    const { data, setData, post, errors, } = useForm({
+        turmas_id: '',
+        alunos_id: ''
     });
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('cadastroSalaa'));
+        post(route('cadSala'));
         console.log('Foi enviado');
     };
 
@@ -24,26 +22,32 @@ export default function CadastroSala() {
                     </div>
                     <input type="hidden" name="id" value={data.id} onChange={(e) => setData('id', e.target.value)} />
                     <div className="flex flex-col space-y-1 mt-4">
-                        <select name="aluno" id="aluno">
+                        <select
+                            name="alunos_id"
+                            id="aluno"
+                            value={data.alunos_id}
+                            onChange={(e) => setData('alunos_id', e.target.value)} required>
+                            <option value="" selected>Selecione um aluno</option>
                             {usePage().props.alunos.map((aluno) => (
                                 <option key={aluno.id} value={aluno.id}>
                                     {aluno.nome}
-                                    </option>
+                                </option>
                             ))}
                         </select>
-                        <span className="text-red-500 mt-2">{errors.codTurma}</span>
+                        <span className="text-red-500 mt-2">{errors.alunos_id}</span>
                     </div>
-                    <div className="flex flex-col space-y-1 mt-4">
-                        <select name="turma" id="turma">
+                    <div className="flex flex-col space-y-1 mt-4" >
+                        <select name="turmas_id" id="turma" value={data.turmas_id}
+                            onChange={(e) => setData('turmas_id', e.target.value)} required>
+                            <option value="" selected>Selecione uma turma</option>
                             {usePage().props.turmas.map((turma) => (
                                 <option key={turma.id} value={turma.id}>
                                     {turma.codTurma}
                                 </option>
                             ))}
                         </select>
-                        <span className="text-red-500 mt-2">{errors.dataInicio}</span>
+                        <span className="text-red-500 mt-2">{errors.turmas_id}</span>
                     </div>
-
                     <button className="px-4 py-2 rounded-lg mt-4 bg-blue-600 text-white hover:bg-blue-400">Adicionar</button>
                 </form>
             </div>
