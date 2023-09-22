@@ -70,11 +70,7 @@ class TurmaController extends Controller
     public function show($id)
     {
         $idTurma = Turma::find($id);
-        if (!$idTurma) {
-            // Trate o caso em que o idTurma não foi encontrado, como redirecionar para uma página de erro ou retornar uma resposta adequada.
-        }
         Inertia::share('turma', $idTurma);
-
         return Inertia::render('turma/EditTurma');
     }
 
@@ -94,26 +90,28 @@ class TurmaController extends Controller
         // dd($request->all());
         $request->validate([
             'codTurma' => 'required|string|max:100',
-            'dataInicio' => 'required|date',
-            'dataFim' => 'required|date',
+            'dataInicio' => 'required|date|after_or_equal:today',
+            'dataFim' => 'required|date|after:dataInicio',
             'qtdAlunos' => 'required',
         ]);
 
         try {
             // Inserir na tabela 'turma'
-            Turma::where('id', $request->id)->update([
+            Turma::where('id_turma', $request->id)->update([
                 'codTurma' => $request->codTurma,
                 'dataInicio' => $request->dataInicio,
                 'dataFim' => $request->dataFim,
                 'qtdAlunos' => $request->qtdAlunos,
             ]);
 
+            return redirect(route('dashboard'));
             // Retornar um status de sucesso
             return response()->json([
                 'status' => 'success',
                 'message' => 'Turma alterada com sucesso!',
             ]);
         } catch (\Exception $e) {
+            return redirect(route('dashboard'));
             // Retornar um status de erro
             return response()->json([
                 'status' => 'error',
@@ -125,8 +123,9 @@ class TurmaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Turma $turma)
+    public function destroy($id)
     {
-        //
+        Turma::find($id)->delete();
+        return redirect(route('dashboard'));
     }
 }

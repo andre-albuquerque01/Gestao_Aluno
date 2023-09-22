@@ -1,8 +1,9 @@
+import NavBar from "@/Components/NavBar";
 import { Head, useForm, usePage } from "@inertiajs/react";
 
 export default function EditAluno() {
     const { data, setData, post, errors } = useForm({
-        id: usePage().props.aluno.id,
+        id_aluno: usePage().props.aluno.id_aluno,
         nome: usePage().props.aluno.nome,
         cpf: usePage().props.aluno.cpf,
         sexo: usePage().props.aluno.sexo,
@@ -16,15 +17,23 @@ export default function EditAluno() {
         post(route('upAluno'));
         console.log('Foi enviado')
     };
-    console.log()
     return (
         <>
             <Head title="Editar aluno" />
+            <NavBar/>
             <div className="flex justify-center">
                 <form onSubmit={submit} >
                     <div className="mt-5 text-2xl">
                         <h1>Cadastro do aluno</h1>
                     </div>
+                    <input
+                        type="hidden"
+                        name="id_aluno"
+                        id="id_aluno"
+                        className="border rounded-md w-96"
+                        value={data.id_aluno}
+                        onChange={(e) => setData('id_aluno', e.target.value)}
+                        required />
 
                     <div className="flex flex-col space-y-1 mt-4">
                         <label htmlFor="nome" className="">Nome:</label>

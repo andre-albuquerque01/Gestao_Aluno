@@ -1,12 +1,12 @@
+import NavBar from "@/Components/NavBar";
 import { Head, useForm, usePage } from "@inertiajs/react";
 
 export default function CadastroTurma() {
     const { data, setData, post, errors } = useForm({
-        id: usePage().props.turma.id,
+        id_turma: usePage().props.turma.id_turma,
         codTurma: usePage().props.turma.codTurma,
         dataInicio: usePage().props.turma.dataInicio,
         dataFim: usePage().props.turma.dataFim,
-        dataNasc: usePage().props.turma.dataNasc,
         qtdAlunos: usePage().props.turma.qtdAlunos,
     });
 
@@ -19,12 +19,13 @@ export default function CadastroTurma() {
     return (
         <>
             <Head title="Editar Turma" />
+            <NavBar/>
             <div className="flex justify-center">
                 <form onSubmit={submit}>
                     <div className="mt-5 text-2xl">
                         <h1>Cadastro da turma</h1>
                     </div>
-                    <input type="hidden" name="id" value={data.id} onChange={(e) => setData('id', e.target.value)} />
+                    <input type="hidden" name="id" value={data.id_turma} onChange={(e) => setData('id_turma', e.target.value)} />
                     <div className="flex flex-col space-y-1 mt-4">
                         <label htmlFor="codTurma">Codigo da turma</label>
                         <input

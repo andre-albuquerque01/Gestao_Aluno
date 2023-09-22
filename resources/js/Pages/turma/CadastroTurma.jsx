@@ -1,3 +1,4 @@
+import NavBar from "@/Components/NavBar";
 import { Head, useForm } from "@inertiajs/react";
 
 export default function CadastroTurma() {
@@ -17,6 +18,7 @@ export default function CadastroTurma() {
     return (
         <>
             <Head title="Cadastro Turma" />
+            <NavBar/>
             <div className="flex justify-center">
                 <form onSubmit={submit}>
                     <div className="mt-5 text-2xl">

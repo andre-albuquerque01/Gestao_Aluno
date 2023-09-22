@@ -9,7 +9,7 @@ class Aluno extends Model
 {
     // use HasFactory;
     protected $table = 'alunos'; // Nome da tabela no banco de dados
-    protected $primaryKey = 'id'; // Nome da chave primária
+    protected $primaryKey = 'id_aluno'; // Nome da chave primária
 
     protected $fillable = [
         'nome',

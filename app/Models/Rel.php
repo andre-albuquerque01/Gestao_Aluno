@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rel extends Model
 {
+    protected $primaryKey = 'id_rels';
     use HasFactory;
     protected $fillable = [
         'alunos_id',

@@ -32,9 +32,9 @@ class LoginController extends Controller
         ]);
         if (Auth::attempt($credenciais)) :
             $request->session()->regenerate();
-            return redirect(route('CadastroAluno'));
+            return redirect(route('dashboard'));
         else :
-            return Inertia::visit(route('CadastroTurma'));
+            return redirect(route('/'));
         endif;
     }
 

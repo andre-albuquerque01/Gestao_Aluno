@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('turmas', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_turma');
             $table->string('codTurma')->nullable(false); // Tornar não nulo
             $table->date('dataInicio')->nullable(false); 
             $table->date('dataFim')->nullable(false); 
