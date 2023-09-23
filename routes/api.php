@@ -19,10 +19,9 @@ use App\Http\Controllers\AuthController;
 // });
 
 Route::group([
-
-    'middleware' => 'api',
+    
+    'middleware' => 'auth:api',
     'prefix' => 'auth'
-
 ], function ($router) {
 
     Route::post('LogIn', [AuthController::class, 'login'])->name('LogIn');

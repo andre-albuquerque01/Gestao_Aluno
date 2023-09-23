@@ -25,12 +25,13 @@ Route::get('/', function () {
     return Inertia::render('Auth/Login');
 });
 Route::get('/', [LoginController::class, 'create'])->name('entrar');
+Route::get('/entrar', [LoginController::class, 'create'])->name('entrar');
 
 Route::middleware(['web'])->group(function () {
     // Route::get('/', [RelController::class, 'index']);
     Route::get('/dashboard', [RelController::class, 'index'])->name('dashboard');
     Route::get('/login', [RelController::class, 'index'])->name('login');
-    Route::get('/entrar', [LoginController::class, 'create'])->name('entrar');
+
     // Cadastro e tela
     // Editar e tela 
     // Aluno
@@ -60,8 +61,6 @@ Route::middleware(['web'])->group(function () {
         ->name('EditRegistro');
     Route::post('upRegistro', [RegisteredUserController::class, 'update'])
         ->name('upRegistro');
-
-    
 });
 
 
