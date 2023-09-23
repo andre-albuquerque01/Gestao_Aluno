@@ -51,7 +51,7 @@ class RegisteredUserController extends Controller
                 'password' => Hash::make($request->password),
                 'remember_token' => Str::random(60),
             ]);
-            return Inertia::visit(route('cadastroTurma'));
+            return redirect(route('dashboard'));
         } catch (\Exception $e) {
             // Retornar um status de erro
             return response()->json([
@@ -60,7 +60,7 @@ class RegisteredUserController extends Controller
             ]);
         }
         event(new Registered($user));
-        return Inertia::visit(route('entrar'));
+        // return redirect(route('dashboard'));
     }
 
     public function update(Request $request)
@@ -87,7 +87,8 @@ class RegisteredUserController extends Controller
                     'remember_token' => Str::random(60),
                 ]);
 
-                return redirect(route('dashboard'))->with('success', 'Perfil atualizado com sucesso.');
+                // return redirect(route('dashboard'))->with('success', 'Perfil atualizado com sucesso.');
+                return redirect(route('/'));
             }
         } catch (\Exception $e) {
             // Em caso de erro, você pode retornar uma resposta JSON com uma mensagem de erro

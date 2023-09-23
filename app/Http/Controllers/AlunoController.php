@@ -52,7 +52,7 @@ class AlunoController extends Controller
                 'email' => $request->email,
                 'rendaMensal' => $rendaMenal,
             ]);
-
+            return redirect(route('dashboard'));
             // Retornar um status de sucesso
             return response()->json([
                 'status' => 'success',
@@ -105,7 +105,7 @@ class AlunoController extends Controller
         else $rendaMenal = $request->rendaMensal;
         try {
             // Inserir na tabela 'aluno'
-            Aluno::where('id_rels', $request->id)->update([
+            Aluno::where('id_aluno', $request->id_aluno)->update([
                 'nome' => $request->nome,
                 'sexo' => $request->sexo,
                 'dataNasc' => $request->dataNasc,
@@ -120,7 +120,7 @@ class AlunoController extends Controller
             ]);
         } catch (\Exception $e) {
             // Retornar um status de erro
-            return redirect(route('dashboard'));
+            // return redirect(route('dashboard'));
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),

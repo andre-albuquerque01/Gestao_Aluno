@@ -37,38 +37,11 @@ class LoginController extends Controller
             return redirect(route('/'));
         endif;
     }
-
-    public function destroy(Request $request): RedirectResponse
+    
+    public function destroy()
     {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/');
+        auth()->logout();
+        return redirect(route('/'));
+        // return response()->json(['message' => 'Successfully logged out']);
     }
 }
-    // public function login(Request $request)
-    // {
-    //     $credentials = request(['email', 'password']);
-
-    //     if (!$token = auth()->attempt($credentials)) {
-    //         return response()->json(['errors' => 'Unauthorized'], 401);
-    //     } else {
-    //         $credenciais = $request->validate([
-    //             'email' => 'required|email',
-    //             'password' => 'required'
-    //         ], [
-    //             'email.email' => 'O email não é válido'
-    //         ]);
-    //         if (Auth::attempt($credenciais)) :
-    //             $request->jwt()->regenerate();
-    //             return redirect('dashboard');
-    //         else :
-    //             return redirect()->back()->with('errors');
-    //         endif;
-    //     }
-
-    //     return $this->respondWithToken($token);
-    // }

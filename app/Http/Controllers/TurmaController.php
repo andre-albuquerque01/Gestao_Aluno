@@ -49,7 +49,7 @@ class TurmaController extends Controller
                 'dataFim' => $request->dataFim,
                 'qtdAlunos' => $request->qtdAlunos,
             ]);
-
+            return redirect(route('dashboard'));
             // Retornar um status de sucesso
             return response()->json([
                 'status' => 'success',
@@ -97,7 +97,7 @@ class TurmaController extends Controller
 
         try {
             // Inserir na tabela 'turma'
-            Turma::where('id_turma', $request->id)->update([
+            Turma::where('id_turma', $request->id_turma)->update([
                 'codTurma' => $request->codTurma,
                 'dataInicio' => $request->dataInicio,
                 'dataFim' => $request->dataFim,
@@ -111,7 +111,7 @@ class TurmaController extends Controller
                 'message' => 'Turma alterada com sucesso!',
             ]);
         } catch (\Exception $e) {
-            return redirect(route('dashboard'));
+            // return redirect(route('dashboard'));
             // Retornar um status de erro
             return response()->json([
                 'status' => 'error',

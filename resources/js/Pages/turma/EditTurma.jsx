@@ -25,7 +25,7 @@ export default function CadastroTurma() {
                     <div className="mt-5 text-2xl">
                         <h1>Cadastro da turma</h1>
                     </div>
-                    <input type="hidden" name="id" value={data.id_turma} onChange={(e) => setData('id_turma', e.target.value)} />
+                    <input type="hidden" name="id_turma" value={data.id_turma} onChange={(e) => setData('id_turma', e.target.value)} />
                     <div className="flex flex-col space-y-1 mt-4">
                         <label htmlFor="codTurma">Codigo da turma</label>
                         <input

@@ -1,16 +1,14 @@
 <?php
 
 use App\Http\Controllers\AlunoController;
-use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\RelController;
 use App\Http\Controllers\TurmaController;
-use App\Models\Rel;
-use App\Models\Turma;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\AuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,34 +21,16 @@ use Inertia\Inertia;
 |
 */
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('entrar'),
-//         'canRegister' => Route::has('registrar'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
-
 Route::get('/', function () {
     return Inertia::render('Auth/Login');
 });
+Route::get('/', [LoginController::class, 'create'])->name('entrar');
 
-Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-// Registro
-// Route::get('registrar', [RegisteredUserController::class, 'create'])
-// ->name('registrar');
-
-// Route::post('registro', [RegisteredUserController::class, 'store']);
-
-// Route::post('entrar', [LoginController::class, 'auth'])->name('entrar');
-
-Route::middleware('auth')->group(function () {
-    // Route::inertia('/dashboard', 'Dashboard')->name('dashboard');
+Route::middleware(['web'])->group(function () {
+    // Route::get('/', [RelController::class, 'index']);
     Route::get('/dashboard', [RelController::class, 'index'])->name('dashboard');
+    Route::get('/login', [RelController::class, 'index'])->name('login');
+    Route::get('/entrar', [LoginController::class, 'create'])->name('entrar');
     // Cadastro e tela
     // Editar e tela 
     // Aluno
@@ -59,7 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/editAluno/{id}', [AlunoController::class, 'show'])->name('editAluno');
     Route::post('/updateAluno', [AlunoController::class, 'update'])->name('upAluno');
     Route::get('/removeAluno/{id}', [AlunoController::class, 'destroy'])->name('removeAluno');
-    
+
     // Cadastro e tela
     // Editar e tela 
     // Turma
@@ -80,6 +60,8 @@ Route::middleware('auth')->group(function () {
         ->name('EditRegistro');
     Route::post('upRegistro', [RegisteredUserController::class, 'update'])
         ->name('upRegistro');
+
+    
 });
 
 

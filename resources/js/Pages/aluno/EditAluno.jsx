@@ -11,7 +11,7 @@ export default function EditAluno() {
         email: usePage().props.aluno.email,
         rendaMensal: usePage().props.aluno.rendaMensal,
     });
-
+    console.log(usePage().props.aluno.cpf);
     const submit = (e) => {
         e.preventDefault();
         post(route('upAluno'));
@@ -20,7 +20,7 @@ export default function EditAluno() {
     return (
         <>
             <Head title="Editar aluno" />
-            <NavBar/>
+            <NavBar />
             <div className="flex justify-center">
                 <form onSubmit={submit} >
                     <div className="mt-5 text-2xl">
@@ -51,7 +51,7 @@ export default function EditAluno() {
                     <div className="flex flex-col space-y-1 mt-4">
                         <label htmlFor="cpf">CPF:</label>
                         <input
-                            type="number"
+                            type="text"
                             name="cpf"
                             id="cpf"
                             className="border rounded-md w-96"

@@ -10,7 +10,7 @@ export default function Sala() {
                 <div className="ml-16">
                     <div className='mt-3 font-bold'>
                         <h1>Sala de aula</h1>
-                        <p>A turma que o aluno está alocado</p>
+                        <p className='font-normal'>A turma que o aluno está alocado, se o aluno não estiver aqui, é porque não foi alocada em nenhuma turma.</p>
                     </div>
                     <div className="flex items-center mt-1 font-normal">
                         <table className="w-2/3 text-center">

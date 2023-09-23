@@ -3,7 +3,7 @@ import iconsLinkedin from '../../img/iconsLinkedin.jpg';
 export default function Footer() {
     return (
         <footer>
-            <section className="bg-black h-full bottom-0 mb-0 mt-20" id='contact'>
+            <section className="bg-black h-full bottom-0 mb-0 mt-20">
                 <div className="flex justify-evenly text-white">
                     <div className="w-2/5 space-y-3 mt-8">
                         <h1 className="text-2xl">André Albuquerque</h1>

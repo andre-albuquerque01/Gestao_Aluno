@@ -1,7 +1,5 @@
 import NavBar from '@/Components/NavBar';
-import { Head, Link, usePage } from '@inertiajs/react';
-import pencil from '../../img/pencil.gif'
-import trash from '../../img/lixo.gif'
+import { Head } from '@inertiajs/react';
 
 import Footer from '@/Components/Footer';
 import Sala from '@/Components/Sala';
@@ -22,6 +20,8 @@ export default function Dashboard() {
                         <Turma />
                     </div>
                 </div>
+            </div>
+            <div className='bottom-0 fixed w-full'>
                 <Footer />
             </div>
         </div>
