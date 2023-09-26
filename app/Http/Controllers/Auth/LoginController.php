@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Inertia\Response;
+
 
 class LoginController extends Controller
 {
@@ -21,6 +19,10 @@ class LoginController extends Controller
     {
         // return Inertia::render('Auth/Login');
         return redirect(route('dashboard'));
+    }
+    public function act()
+    {
+        return Inertia::render('Auth/Login');
     }
 
     public function auth(Request $request)

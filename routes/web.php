@@ -6,8 +6,6 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\RelController;
 use App\Http\Controllers\TurmaController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-use App\Http\Controllers\AuthController;
 
 
 /*
@@ -22,14 +20,17 @@ use App\Http\Controllers\AuthController;
 */
 
 // Route::get('/', function () {
-//     return Inertia::render('Auth/Login');
+//     // return Inertia::render('Auth/Login');
+//     return redirect(route('Auth/Login'));
 // });
+Route::get('/entrar', [LoginController::class, 'act'])->name('login');
+Route::redirect('/', '/entrar');
+
 
 Route::middleware(['web'])->group(function () {
-    Route::get('/entrar', [LoginController::class, 'create'])->name('entrar');
     // Route::get('/', [RelController::class, 'index']);
     Route::get('/dashboard', [RelController::class, 'index'])->name('dashboard');
-    Route::get('/login', [RelController::class, 'index'])->name('login');
+    // Route::get('/login', [RelController::class, 'index'])->name('login');
 
     // Cadastro e tela
     // Editar e tela 
