@@ -17,9 +17,10 @@ class LoginController extends Controller
     //     $this->middleware('auth:api', ['except' => ['entrar']]);
     // }
 
-    public function create(): Response
+    public function create()
     {
-        return Inertia::render('Auth/Login');
+        // return Inertia::render('Auth/Login');
+        return redirect(route('dashboard'));
     }
 
     public function auth(Request $request)
