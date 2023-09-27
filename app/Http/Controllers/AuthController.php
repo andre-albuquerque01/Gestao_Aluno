@@ -33,7 +33,7 @@ class AuthController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         return redirect(route('dashboard'));
-        return $this->respondWithToken($token);
+        // return $this->respondWithToken($token);
     }
 
     /**

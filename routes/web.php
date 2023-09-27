@@ -25,12 +25,11 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/entrar', [LoginController::class, 'act'])->name('login');
 Route::redirect('/', '/entrar');
+Route::post('LogIn', [LoginController::class, 'auth'])->name('LogIn');
+// Route::post('LogIn', [AuthController::class, 'login'])->name('LogIn');
 
-Route::middleware(['web'])->group(function () {
-    Route::post('LogIn', [LoginController::class, 'auth'])->name('LogIn');
-    // Route::get('/', [RelController::class, 'index']);
+Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [RelController::class, 'index'])->name('dashboard');
-    // Route::get('/login', [RelController::class, 'index'])->name('login');
 
     // Cadastro e tela
     // Editar e tela 
@@ -61,6 +60,8 @@ Route::middleware(['web'])->group(function () {
         ->name('EditRegistro');
     Route::post('upRegistro', [RegisteredUserController::class, 'update'])
         ->name('upRegistro');
+
+    Route::get('logout',  [LoginController::class, 'destroy'])->name('logout');
 });
 
 

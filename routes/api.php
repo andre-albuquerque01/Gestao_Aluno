@@ -25,7 +25,7 @@ Route::group([
     'prefix' => 'auth'
 ], function ($router) {
 
-    // Route::post('LogIn', [AuthController::class, 'login'])->name('LogIn');
+    Route::post('LogIn', [AuthController::class, 'login'])->name('LogIn');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('refresh', [AuthController::class, 'refresh'])->name('refresh');
     Route::post('me', [AuthController::class, 'me'])->name('me');

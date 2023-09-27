@@ -37,14 +37,13 @@ class LoginController extends Controller
             $request->session()->regenerate();
             return redirect(route('dashboard'));
         else :
-            return redirect(route('/'));
+            return redirect(route('login'));
         endif;
     }
     
     public function destroy()
     {
         auth()->logout();
-        return redirect(route('/'));
-        // return response()->json(['message' => 'Successfully logged out']);
+        return redirect(route('login'));
     }
 }
